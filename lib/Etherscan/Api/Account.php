@@ -1,7 +1,5 @@
 <?php
-
 namespace Etherscan\Api;
-
 
 use Etherscan\APIConf;
 use Etherscan\Exception\ErrorException;
@@ -40,7 +38,8 @@ class Account extends AbstractApi
      * @return array
      * @throws ErrorException
      */
-    public function balanceMulti($addresses, $tag = APIConf::TAG_LATEST) {
+    public function balanceMulti($addresses, $tag = APIConf::TAG_LATEST)
+    {
         if (is_array($addresses)) {
             $addresses = implode(",", $addresses);
         }
@@ -52,7 +51,61 @@ class Account extends AbstractApi
             'tag' => $tag
         ]);
     }
-
+    
+    /**
+     * Get Historical Ether Balance for a single Address By BlockNo
+     * 
+     * @param string $address
+     * @param int $blockNo
+     * 
+     * @return array
+     * @throws ErrorException
+     */
+    public function balanceHistory($address, $blockNo)
+    {
+        return $this->request->exec([
+            'module' => "account",
+            'action' => "balancehistory",
+            'address' => $address,
+            'blockno' => $blockNo,
+        ]);
+    }
+    
+    /**
+     * Get a list of 'Normal' Transactions By Address
+     * (Returns up to a maximum of the last 10000 transactions only)
+     * 
+     * @param string $address Ether address.
+     * @param int $startBlock Starting blockNo to retrieve results
+     * @param int $endBlock Ending blockNo to retrieve results
+     * @param string $sort 'asc' or 'desc'
+     * @param int $page Page number
+     * @param int $offset Offset
+     * 
+     * @return array
+     * @throws ErrorException
+     */
+    public function transactionListByAddress($address, $startBlock = 0, $endBlock = 99999999, $sort = "asc", $page = null, $offset = null)
+    {
+        $params = [
+            'module' => "account",
+            'action' => "txlistinternal",
+            'address' => $address,
+            'startblock' => $startBlock,
+            'endblock' => $endBlock,
+            'sort' => $sort
+        ];
+        
+        if (!is_null($page)) {
+            $params['page'] = (int)$page;
+        }
+        
+        if (!is_null($offset)) {
+            $params['offset'] = (int)$offset;
+        }
+        
+        return $this->request->exec($params);
+    }
 
     /**
      * Get a list of 'Internal' Transactions by Address
@@ -68,7 +121,8 @@ class Account extends AbstractApi
      * @return array
      * @throws ErrorException
      */
-    public function transactionListInternalByAddress($address, $startBlock = 0, $endBlock = 99999999, $sort = "asc", $page = null, $offset = null) {
+    public function transactionListInternalByAddress($address, $startBlock = 0, $endBlock = 99999999, $sort = "asc", $page = null, $offset = null)
+    {
         $params = [
             'module' => "account",
             'action' => "txlistinternal",
@@ -97,7 +151,8 @@ class Account extends AbstractApi
      * @return array
      * @throws ErrorException
      */
-    public function transactionListInternalByHash($transactionHash) {
+    public function transactionListInternalByHash($transactionHash)
+    {
         return $this->request->exec([
             'module' => "account",
             'action' => "txlistinternal",
@@ -116,7 +171,8 @@ class Account extends AbstractApi
      * @return array
      * @throws ErrorException
      */
-    public function getMinedBlocks($address, $blockType = APIConf::BLOCK_TYPE_BLOCKS, $page = null, $offset = null) {
+    public function getMinedBlocks($address, $blockType = APIConf::BLOCK_TYPE_BLOCKS, $page = null, $offset = null)
+    {
         if (!in_array($blockType, APIConf::$blockTypes)) {
             throw new ErrorException("Invalid block type");
         }
@@ -138,8 +194,7 @@ class Account extends AbstractApi
 
         return $this->request->exec($params);
     }
-
-
+    
     /**
      * Get Token Account Balance by known TokenName (Supported TokenNames: DGD,
      * MKR, FirstBlood, HackerGold, ICONOMI, Pluton, REP, SNGLS).
@@ -155,7 +210,8 @@ class Account extends AbstractApi
      * @return array
      * @throws ErrorException
      */
-    public function tokenBalance($tokenIdentifier, $address, $tag = APIConf::TAG_LATEST) {
+    public function tokenBalance($tokenIdentifier, $address, $tag = APIConf::TAG_LATEST)
+    {
         $params = [
             'module' => "account",
             'action' => "tokenbalance",

@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan;
 
 /**
@@ -9,7 +8,8 @@ namespace Etherscan;
  */
 class APIConf
 {
-    const API_URL = "https://api.etherscan.io/api";
+    //const API_URL = "https://api.etherscan.io/api";
+    const API_URL = 'https://api-cn.etherscan.com/api';
 
     const TESTNET_ROPSTEN = "api-ropsten";
     const TESTNET_KOVAN = "api-kovan";
@@ -26,7 +26,8 @@ class APIConf
      * @param null $net
      * @return string
      */
-    public static function getAPIUrl($net = null) {
+    public static function getAPIUrl($net = null)
+    {
         if (is_null($net)) {
             return self::API_URL;
         }

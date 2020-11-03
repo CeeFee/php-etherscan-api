@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\HttpClient;
 
 use Etherscan\APIConf;
@@ -10,8 +9,8 @@ use Etherscan\Exception\ErrorException;
  * @package Etherscan\HttpClient
  * @author Maslakou Ihar <igormaslakoff@gmail.com>
  */
-class Request implements HttpClientInterface {
-
+class Request implements HttpClientInterface
+{
     /**
      * Etherscan API Key value.
      *
@@ -33,7 +32,8 @@ class Request implements HttpClientInterface {
      */
     private static $ch = null;
 
-    public function __construct($apiKeyToken, $net = null) {
+    public function __construct($apiKeyToken, $net = null)
+    {
         $this->apiKeyToken = $apiKeyToken;
         $this->net = $net;
     }
@@ -46,7 +46,8 @@ class Request implements HttpClientInterface {
      * @return array JSON data.
      * @throws ErrorException If Curl error or Etherscan API error occurred.
      */
-    public function exec(array $req = []) {
+    public function exec(array $req = [])
+    {
         usleep(250000);
 
         // API settings
@@ -92,7 +93,8 @@ class Request implements HttpClientInterface {
      *
      * @return array JSON data.
      */
-    public static function json($url) {
+    public static function json($url)
+    {
         $opts = [
             'http' => [
                 'method' => 'GET',

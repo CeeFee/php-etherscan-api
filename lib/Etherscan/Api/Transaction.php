@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 /**
@@ -19,7 +18,8 @@ class Transaction extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function getStatus($transactionHash) {
+    public function getStatus($transactionHash)
+    {
         return $this->request->exec([
             'module' => "transaction",
             'action' => "getstatus",
@@ -36,7 +36,8 @@ class Transaction extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function getContractExecutionStatus($transactionHash) {
+    public function getContractExecutionStatus($transactionHash)
+    {
         return $this->getStatus($transactionHash);
     }
 }

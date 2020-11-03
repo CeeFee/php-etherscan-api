@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 /**
@@ -19,7 +18,8 @@ class Contract extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function getABI($address) {
+    public function getABI($address)
+    {
         return $this->request->exec([
             'module' => "contract",
             'action' => "getabi",
@@ -36,7 +36,8 @@ class Contract extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function getContractABI($address) {
+    public function getContractABI($address)
+    {
         return $this->getABI($address);
     }
 }

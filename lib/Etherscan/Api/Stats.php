@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 /**
@@ -9,7 +8,6 @@ namespace Etherscan\Api;
  */
 class Stats extends AbstractApi
 {
-
     /**
      * Get Token TotalSupply by TokenName (Supported TokenNames: DGD, MKR,
      * FirstBlood, HackerGold, ICONOMI, Pluton, REP, SNGLS).
@@ -23,7 +21,8 @@ class Stats extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function tokenSupply($tokenIdentifier) {
+    public function tokenSupply($tokenIdentifier)
+    {
         $params = [
             'module' => "stats",
             'action' => "tokensupply",
@@ -44,7 +43,8 @@ class Stats extends AbstractApi
      * @return array Result returned in Wei, to get value in Ether divide resultAbove / 1000000000000000000
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function ethSupply() {
+    public function ethSupply()
+    {
         return $this->request->exec([
             'module' => "stats",
             'action' => "ethsupply",
@@ -57,7 +57,8 @@ class Stats extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function ethPrice() {
+    public function ethPrice()
+    {
         return $this->request->exec([
             'module' => "stats",
             'action' => "ethprice",

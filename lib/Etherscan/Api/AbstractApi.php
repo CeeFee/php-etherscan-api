@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 use Etherscan\Client;

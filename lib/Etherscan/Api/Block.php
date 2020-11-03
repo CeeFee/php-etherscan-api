@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 /**
@@ -16,7 +15,8 @@ class Block extends AbstractApi
      * @return array
      * @throws \Etherscan\Exception\ErrorException
      */
-    public function getBlockReward($blockNumber) {
+    public function getBlockReward($blockNumber)
+    {
         return $this->request->exec([
             'module' => "block",
             'action' => "getblockreward",

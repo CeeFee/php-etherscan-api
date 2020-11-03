@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 use Etherscan\APIConf;
@@ -12,7 +11,6 @@ use Etherscan\Exception\ErrorException;
  */
 class Proxy extends AbstractApi
 {
-
     /**
      * Returns the number of most recent block
      *
@@ -31,7 +29,7 @@ class Proxy extends AbstractApi
      * Returns information about a block by block number
      *
      * @param string $tag
-     * @param booelan $full_transaction
+     * @param boolean $full_transaction
      * 
      * @return array
      * @throws ErrorException

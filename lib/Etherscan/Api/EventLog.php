@@ -1,5 +1,4 @@
 <?php
-
 namespace Etherscan\Api;
 
 use Etherscan\APIConf;
@@ -11,7 +10,6 @@ use Etherscan\APIConf;
  */
 class EventLog extends AbstractApi
 {
-
     /**
      * Get Event Logs
      *
